@@ -107,13 +107,13 @@ scripts\\stop.bat
 后端健康检查：
 
 ```text
-GET http://127.0.0.1:13144/health
+GET http://127.0.0.1:13144/api/health
 ```
 
 缘分测算接口：
 
 ```text
-POST http://127.0.0.1:13144/compatibility
+POST http://127.0.0.1:13144/api/compatibility
 ```
 
 请求示例：

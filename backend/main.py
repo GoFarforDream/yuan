@@ -14,10 +14,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-@app.get("/health")
+@app.get("/api/health")
 def health() -> dict[str, str]:
     return {"status": "ok"}
 
-
-app.include_router(compatibility_router)
+app.include_router(compatibility_router, prefix="/api")
