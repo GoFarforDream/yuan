@@ -19,7 +19,7 @@ def main() -> None:
             "--host",
             "127.0.0.1",
             "--port",
-            "8000",
+            "13144",
             "--reload",
         ],
     )
@@ -28,7 +28,7 @@ def main() -> None:
         shell=True,
     )
 
-    print("Backend:  http://127.0.0.1:8000")
+    print("Backend:  http://127.0.0.1:13144")
     print("Frontend: http://127.0.0.1:5173")
     print("Press Ctrl+C to stop.")
 
