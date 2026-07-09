@@ -35,7 +35,8 @@ body {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
@@ -183,6 +184,12 @@ h1 {
   background: rgba(255, 250, 252, 0.88);
 }
 
+.date-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
 .person-label {
   color: #8f1f47;
   font-size: 0.86rem;
@@ -212,7 +219,27 @@ input {
     transform 0.2s ease;
 }
 
+select {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid #e3a2bb;
+  border-radius: 14px;
+  outline: none;
+  padding: 0 12px;
+  color: #4a1832;
+  background: #fff;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
 input:focus {
+  border-color: #c81e5e;
+  box-shadow: 0 0 0 4px rgba(200, 30, 94, 0.12);
+}
+
+select:focus {
   border-color: #c81e5e;
   box-shadow: 0 0 0 4px rgba(200, 30, 94, 0.12);
 }
@@ -495,6 +522,10 @@ meter::-webkit-meter-optimum-value {
   }
 
   .match-form {
+    grid-template-columns: 1fr;
+  }
+
+  .date-grid {
     grid-template-columns: 1fr;
   }
 

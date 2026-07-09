@@ -2,12 +2,20 @@
 import { computed, reactive, ref } from 'vue'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:13144'
+const currentYear = new Date().getFullYear()
+const yearOptions = Array.from({ length: 101 }, (_, index) => currentYear - index)
+const monthOptions = Array.from({ length: 12 }, (_, index) => index + 1)
+const dayOptions = Array.from({ length: 31 }, (_, index) => index + 1)
 
 const form = reactive({
   name1: '',
-  birthday1: '',
+  birthYear1: '',
+  birthMonth1: '',
+  birthDay1: '',
   name2: '',
-  birthday2: '',
+  birthYear2: '',
+  birthMonth2: '',
+  birthDay2: '',
 })
 
 const result = ref(null)
@@ -23,6 +31,15 @@ const scoreStyle = computed(() => {
     background: `conic-gradient(#d81b60 ${score * 3.6}deg, #f9d7e3 0deg)`,
   }
 })
+
+function pad(value) {
+  return String(value).padStart(2, '0')
+}
+
+function buildBirthday(year, month, day) {
+  if (!year || !month || !day) return null
+  return `${year}-${pad(month)}-${pad(day)}`
+}
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms))
@@ -47,8 +64,8 @@ async function calculate() {
       body: JSON.stringify({
         name1: form.name1,
         name2: form.name2,
-        birthday1: form.birthday1 || null,
-        birthday2: form.birthday2 || null,
+        birthday1: buildBirthday(form.birthYear1, form.birthMonth1, form.birthDay1),
+        birthday2: buildBirthday(form.birthYear2, form.birthMonth2, form.birthDay2),
       }),
     })
 
@@ -70,9 +87,13 @@ async function calculate() {
 
 function resetForm() {
   form.name1 = ''
-  form.birthday1 = ''
+  form.birthYear1 = ''
+  form.birthMonth1 = ''
+  form.birthDay1 = ''
   form.name2 = ''
-  form.birthday2 = ''
+  form.birthYear2 = ''
+  form.birthMonth2 = ''
+  form.birthDay2 = ''
   result.value = null
   error.value = ''
   requestHint.value = '准备就绪'
@@ -103,10 +124,29 @@ function resetForm() {
             <span>姓名</span>
             <input v-model="form.name1" type="text" autocomplete="name" placeholder="例如：林小鹿" />
           </label>
-          <label>
-            <span>出生日期</span>
-            <input v-model="form.birthday1" type="date" />
-          </label>
+          <div class="date-grid">
+            <label>
+              <span>年</span>
+              <select v-model="form.birthYear1">
+                <option value="" disabled>选择年份</option>
+                <option v-for="year in yearOptions" :key="year" :value="year">{{ year }}</option>
+              </select>
+            </label>
+            <label>
+              <span>月</span>
+              <select v-model="form.birthMonth1">
+                <option value="" disabled>选择月份</option>
+                <option v-for="month in monthOptions" :key="month" :value="month">{{ month }}</option>
+              </select>
+            </label>
+            <label>
+              <span>日</span>
+              <select v-model="form.birthDay1">
+                <option value="" disabled>选择日期</option>
+                <option v-for="day in dayOptions" :key="day" :value="day">{{ day }}</option>
+              </select>
+            </label>
+          </div>
         </div>
 
         <div class="link-badge">MATCH</div>
@@ -117,10 +157,29 @@ function resetForm() {
             <span>姓名</span>
             <input v-model="form.name2" type="text" autocomplete="name" placeholder="例如：许星河" />
           </label>
-          <label>
-            <span>出生日期</span>
-            <input v-model="form.birthday2" type="date" />
-          </label>
+          <div class="date-grid">
+            <label>
+              <span>年</span>
+              <select v-model="form.birthYear2">
+                <option value="" disabled>选择年份</option>
+                <option v-for="year in yearOptions" :key="year" :value="year">{{ year }}</option>
+              </select>
+            </label>
+            <label>
+              <span>月</span>
+              <select v-model="form.birthMonth2">
+                <option value="" disabled>选择月份</option>
+                <option v-for="month in monthOptions" :key="month" :value="month">{{ month }}</option>
+              </select>
+            </label>
+            <label>
+              <span>日</span>
+              <select v-model="form.birthDay2">
+                <option value="" disabled>选择日期</option>
+                <option v-for="day in dayOptions" :key="day" :value="day">{{ day }}</option>
+              </select>
+            </label>
+          </div>
         </div>
 
         <div class="actions">
