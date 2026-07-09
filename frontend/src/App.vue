@@ -1,7 +1,7 @@
 <script setup>
 import { computed, reactive, ref } from 'vue'
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://yuan.voyagers.work/api'
+const API_URL = import.meta.env.VITE_API_URL || 'http://yuan.voyagers.work/api'
 const currentYear = new Date().getFullYear()
 const yearOptions = Array.from({ length: 101 }, (_, index) => currentYear - index)
 const monthOptions = Array.from({ length: 12 }, (_, index) => index + 1)
