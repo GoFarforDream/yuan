@@ -23,5 +23,4 @@ def health_legacy() -> dict[str, str]:
     return {"status": "ok"}
 
 
-app.include_router(compatibility_router)
 app.include_router(compatibility_router, prefix="/api")

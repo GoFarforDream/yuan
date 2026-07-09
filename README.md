@@ -129,5 +129,5 @@ POST http://127.0.0.1:13144/api/compatibility
 
 ## 说明
 
-- 前端默认请求地址是同源 `/api`
+- 前端默认请求地址是 `http://yuan.voyagers.work/api`
 - 如果你部署到别的机器，可以通过环境变量 `VITE_API_URL` 覆盖前端请求地址
